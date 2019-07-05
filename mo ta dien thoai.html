@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        let Mobile = function (battery, sentMessage, inbox, draftMessage, status) {
+            this.battery = battery;
+            this.sentMessage = sentMessage;
+            this.inbox = inbox;
+            this.drafMessage = draftMessage;
+            this.status = status;
+
+            this.chargeBattery = function () {
+                this.battery = 100;
+            };
+
+            this.receiveMessage = function (message) {
+                if (this.status) {
+                    this.inbox.push(message);
+                    this.battery -= 1;
+                } else alert("Mobile is off");
+            };
+
+            this.sendMessage = function (message) {
+                if (this.status) {
+                    this.sentMessage.push(message);
+                    this.battery -= 1;
+                }else alert("Mobile is off");
+            };
+
+            this.getInbox = function () {
+                if (this.status) {
+                    this.battery -= 1;
+                    return this.inbox;
+                }else alert("Mobile is off");
+            };
+            this.getSentMessage = function () {
+                if (this.status) {
+                    this.battery -= 1;
+                    return this.sentMessage;
+                } else alert("Mobile is off");
+            };
+
+            this.getStatus = function () {
+                return this.status;
+            };
+        };
+
+        let nokia = new Mobile(60,[],[],'',true);
+        let iphone = new Mobile(80,[],[],'',true);
+
+        let s="hello";
+        nokia.sendMessage(s);
+        iphone.receiveMessage(s);
+        document.write("Send message Nokia: "+nokia.getSentMessage()+"<br>");
+        document.write("Inbox Iphone: " + iphone.getInbox());
+
+    </script>
+</body>
+</html>
