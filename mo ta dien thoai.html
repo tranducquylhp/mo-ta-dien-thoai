@@ -17,16 +17,17 @@
                 this.battery = 100;
             };
 
-            this.receiveMessage = function (message) {
+            this.receiveMessage = function (message, mobie) {
                 if (this.status) {
                     this.inbox.push(message);
                     this.battery -= 1;
                 } else alert("Mobile is off");
             };
 
-            this.sendMessage = function (message) {
+            this.sendMessage = function (message, mobile) {
                 if (this.status) {
                     this.sentMessage.push(message);
+                    mobile.receiveMessage(message,this);
                     this.battery -= 1;
                 }else alert("Mobile is off");
             };
@@ -53,8 +54,7 @@
         let iphone = new Mobile(80,[],[],'',true);
 
         let s="hello";
-        nokia.sendMessage(s);
-        iphone.receiveMessage(s);
+        nokia.sendMessage(s,iphone);
         document.write("Send message Nokia: "+nokia.getSentMessage()+"<br>");
         document.write("Inbox Iphone: " + iphone.getInbox());
 
